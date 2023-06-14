@@ -3,7 +3,7 @@
 
 USAGE
 1. Install Python from [here](https://www.python.org/downloads/) 
-2. Install PySerial from [here](https://pypi.org/project/pyserial/#files) 
+2. Install PySerial from [here](https://pypi.org/project/pyserial/#files) (HINT: click pyserial-3.5.tar.gz)
 3. Download and install [7ZIP](https://7-zip.org/)
 4. Download  this repo as ZIP.
 5. Extract zip file and copy content to a new folder on your C: drive called DJItools
