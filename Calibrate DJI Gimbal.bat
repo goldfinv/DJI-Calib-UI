@@ -1,3 +1,4 @@
+
 @echo off
 setlocal enabledelayedexpansion
 
@@ -61,9 +62,12 @@ REM Get the selected model number from the list
 set "model_num=!model[%selection%]!"
 
 REM Replace 'comX' and 'MODEL' with the selected COM port and model number in the commands
-set "command1=python comm_og_service_tool.py %com_port% %model_num% GimbalCalib JointCoarse"
+set "command1=python comm_og_service_tool.py --port %com_port% %model_num% GimbalCalib JointCoarse"
 echo Running command 1: %command1%
-REM Execute command1 here
+REM Execute command1 here and capture the output
+for /f "delims=" %%B in ('%command1%') do (
+  echo %%B
+)
 
 REM Prompt for the second command
 echo Do you want to run the second command?
@@ -75,15 +79,15 @@ set /p "choice=Enter 1 for YES or 2 for NO: "
 
 REM Validate the user's choice
 if "%choice%" equ "1" (
-  set "command2=python comm_og_service_tool.py %com_port% %model_num% GimbalCalib LinearHall"
+  set "command2=python comm_og_service_tool.py --port %com_port% %model_num% GimbalCalib LinearHall"
   echo Running command 2: %command2%
-  REM Execute command2 here
+  REM Execute command2 here and capture the output
+  for /f "delims=" %%B in ('%command2%') do (
+    echo %%B
+  )
+  pause
 ) else if "%choice%" equ "2" (
   echo Second command skipped.
-) else (
-  echo Invalid choice. Please try again.
-  exit /b
 )
 
-echo Calibration completed.
-pause
+REM Prompt user to press 1 to exit
